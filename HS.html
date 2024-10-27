@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Styler</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Reset and base styling */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Roboto', sans-serif; background: #f0f3f7; color: #333; }
+
+        /* Container styling */
+        .container {
+            width: 100%;
+            padding: 0;
+            background: linear-gradient(135deg, #e6e9f0, #eef2f5);
+            border-top: 5px solid #22262a;
+            border-radius: 0;
+        }
+
+        /* Header styling */
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: #414852;
+            color: #fff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -10%;
+            width: 120%;
+            height: 200%;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+            transform: rotate(45deg);
+            animation: slide 6s linear infinite;
+        }
+
+        @keyframes slide {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin: 0;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Image section */
+        .image-section {
+            text-align: center;
+            padding: 30px;
+            position: relative;
+        }
+
+        .laptop-image {
+            width: 100%; /* Set to 100% */
+            height: auto; /* Maintain aspect ratio */
+            margin: 0;
+            padding: 0;
+            border-radius: 15px;
+            border: 5px solid rgba(14, 16, 19, 0.7);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            background: #fff;
+        }
+
+        .laptop-image:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Button styling */
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .button {
+            display: inline-block;
+            background: #414852;
+            color: #fff;
+            padding: 12px 25px;
+            font-size: 16px;
+            margin: 10px;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border: none;
+            cursor: pointer;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .button:hover {
+            transform: translateY(-4px);
+            
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Description styling */
+        .description {
+            padding: 30px;
+            margin: 20px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .description:hover {
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            font-size: 2em;
+            color:  #414852;
+            text-align: center;
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        /* Testimonials section */
+        .testimonials {
+            padding: 30px;
+            margin: 20px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .testimonials:hover {
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .testimonial {
+            margin: 10px 0;
+            font-style: italic;
+            color: #555;
+            text-align: center;
+        }
+
+        ol {
+            list-style-type: decimal;
+            padding-left: 25px;
+            margin-top: 10px;
+        }
+
+        ol li {
+            padding: 10px 0;
+            font-size: 16px;
+            color: #555;
+            transition: color 0.3s ease; /* Added transition for color change */
+        }
+
+        ol li:hover {
+            color:  #414852; /* Color change on hover */
+            
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            h1 { font-size: 1.8em; }
+            h2 { font-size: 1.5em; }
+            .functional-requirements { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Home Styler</h1>
+        </header>
+
+        <!-- Image Section -->
+        <div class="image-section">
+            <img src="assets/img/home_styler.png" alt="Home Styler Design" class="laptop-image">
+            <div class="button-container">
+                <a href="https://myhomestyler.netlify.app" class="button">Live Preview</a>
+                <a href="documentation/webwarriorsdocumentation.docx" class="button" download>Download Documentation</a>
+
+            </div>
+        </div>
+        <!-- Functional Requirements Section -->
+        <div class="functional-requirements">
+            <h2>Functional Requirements</h2>
+            <ol>
+                <li><strong>Home Page:</strong> Displays a design gallery and menus for different features, using either a table or image gallery.</li>
+                <li><strong>Viewing Design Styles:</strong> Users can view design styles by categories (e.g., Living Room, Kitchen). Each design page includes images, descriptions, and product lists.</li>
+                <li><strong>Professional Interior Designers Gallery:</strong> Users can view designers' details for contact.</li>
+                <li><strong>Searching, Sorting, and Filtering:</strong> Users can search, sort, and filter designs by various criteria.</li>
+                <li><strong>Feedback:</strong> A form allows users to provide feedback (data not saved).</li>
+                <li><strong>Contact Us:</strong> Displays contact info, with optional GPS/geolocation.</li>
+                <li><strong>Browsing Products:</strong> Allows browsing interior products by type, including categories like Furniture, Lighting, Decor, Kitchen, and Bathroom.</li>
+                <li><strong>Product Selection:</strong> Users can filter products, add selections to a wishlist.</li>
+                <li><strong>User Reviews and Ratings:</strong> Users can view reviews and ratings for designs and products.</li>
+                <li><strong>About Us Page:</strong> Provides information about the website creators.</li>
+                <li><strong>Sitemap:</strong> A sitemap is provided on the home page to guide users through the site.</li>
+            </ol>
+        </div>
+
+        <!-- Testimonials Section -->
+        <div class="testimonials">
+            <h2>Testimonials</h2>
+            <div class="testimonial">"Home Styler helped me visualize my dream living room. The designs are stunning!" - Sarah L.</div>
+            <div class="testimonial">"An amazing platform for finding inspiration! I loved the variety of styles." - John D.</div>
+            <div class="testimonial">"I can't recommend Home Styler enough! The designers are top-notch." - Emily R.</div>
+        </div>
+    </div>
+</body>
+</html>

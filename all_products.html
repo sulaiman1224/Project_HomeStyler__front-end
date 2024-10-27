@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bootstrap 5 Multi-level Drop down Menu</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="products.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+  <style>
+    .search-bar {
+      margin: 20px;
+    }
+    .single-card {
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 15px;
+      margin: 10px;
+      text-align: center;
+    }
+    .img-area img {
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <section id="navbar"></section>
+
+  <section class="living_room">
+    <div class="search-bar d-flex align-items-center">
+      <input type="text" id="searchInput" placeholder="Search products..." class="form-control me-2">
+      <select id="categoryFilter" class="form-select me-2">
+        <option value="all">All Products</option>
+        <option value="living_Room">Living Room</option>
+        <option value="bedroom">Bedroom</option>
+        <option value="kitchen">Kitchen</option>
+        <option value="elegant">Elegant</option>
+      </select>
+      <select id="priceFilter" class="form-select">
+        <option value="">Filter by Price</option>
+        <option value="low">Low to High</option>
+        <option value="high">High to Low</option>
+      </select>
+    </div>
+
+    <div class="wrapper"></div>
+
+    <script>
+      let products = {};
+      const wrapper = document.querySelector('.wrapper');
+      const searchInput = document.getElementById('searchInput');
+      const priceFilter = document.getElementById('priceFilter');
+      const categoryFilter = document.getElementById('categoryFilter');
+
+      fetch('data.json')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+          }
+          return response.json();
+        })
+        .then(data => {
+          products = data;
+          displayProducts(products.living_Room);
+
+          searchInput.addEventListener('input', filterProducts);
+          priceFilter.addEventListener('change', filterProducts);
+          categoryFilter.addEventListener('change', (e) => {
+            const selectedCategory = e.target.value;
+            if (selectedCategory === 'all') {
+              const allProducts = Object.values(products).flat();
+              displayProducts(allProducts);
+            } else {
+              displayProducts(products[selectedCategory]);
+            }
+          });
+        })
+        .catch(error => console.error('Error fetching data:', error));
+
+      function filterProducts() {
+        const searchTerm = searchInput.value.toLowerCase();
+        const selectedCategory = categoryFilter.value;
+        const selectedPriceFilter = priceFilter.value;
+
+        let filteredItems = selectedCategory === 'all'
+          ? Object.values(products).flat()
+          : products[selectedCategory];
+
+        filteredItems = filteredItems.filter(item =>
+          item.title.toLowerCase().includes(searchTerm) ||
+          item.description.toLowerCase().includes(searchTerm)
+        );
+
+        filteredItems.forEach(item => {
+          item.numericPrice = parseFloat(item.price.replace(/[^0-9.-]+/g, ''));
+        });
+
+        if (selectedPriceFilter === 'low') {
+          filteredItems.sort((a, b) => a.numericPrice - b.numericPrice);
+        } else if (selectedPriceFilter === 'high') {
+          filteredItems.sort((a, b) => b.numericPrice - a.numericPrice);
+        }
+
+        displayProducts(filteredItems);
+      }
+
+      function displayProducts(items) {
+        wrapper.innerHTML = '';
+        items.forEach(item => {
+          const card = `
+            <div class="single-card">
+              <div class="img-area">
+                <img src="${item.imageSrc}" alt="${item.title}">
+              </div>
+              <div class="info">
+                <h3>${item.title}</h3>
+                <p class="price">${item.price}</p>
+                <p>${item.description}</p>
+              </div>
+            </div>
+          `;
+          wrapper.innerHTML += card;
+        });
+      }
+    </script>
+  </section>
+<script src="assets/js/navbar.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>

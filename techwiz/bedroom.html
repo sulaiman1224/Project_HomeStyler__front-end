@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">   
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap 5 Multi level Drop down Menu</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="products.css">
+    <!-- <link rel="stylesheet" href="banner.css"> -->
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+    
+/* .background-image { */
+    /* position: fixed; */
+    /* position: absolute; */
+    /* width: 100%; */
+    /* height: 500px; */
+    /* opacity: 0.8; */
+    /* This can stay as it is */
+    /* background: url('') no-repeat center center; Add your image URL */
+    /* background-size: cover; */
+
+    .overlay {
+    /* position: relative; Change to relative to position the overlay properly */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    /* Darker text color */
+    /* background-color: black; */
+    text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);
+    /* Darker shadow */
+}
+
+.overlay::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 500px;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Semi-transparent black overlay */
+    z-index: 1;
+}
+
+.overlay * {
+    position: relative;
+    /* Make sure text stays above the overlay */
+    z-index: 2;
+}
+
+</style>
+    
+</head>
+<body>
+    
+    <section id="navbar"></section>
+
+
+    <!-- HERO SECTON STARTS -->
+    <!-- <div>
+        <div class="container-fluide" style="position: relative;top: 0px;">
+            <img src="assets/img/banner.jpg" alt="" class="background-image">
+            <div class="overlay">
+                <h1>Home Styler</h1>
+                <p>Transform Your Space, Ignite Your Style!</p>
+            </div>
+        </div>
+    </div> -->
+
+
+    <div class="overlay">
+        <h2>Home Styler</h2>
+    </div>
+    </div>
+    <!-- HERO SECTION ENDS  -->
+
+
+    <div class="wrapper"></div>
+
+    <script>
+      fetch('data.json') 
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+          }
+          return response.json();j
+        })
+        .then(data => {
+          const livingRoomItems = data.bedroom; 
+          const wrapper = document.querySelector('.wrapper');
+
+          livingRoomItems.forEach(item => {
+            const card = `
+              <div class="single-card">
+                <div class="img-area">
+                  <img src="${item.imageSrc}" alt="${item.title}">
+                </div>
+                <div class="info">
+                  <h3>${item.title}</h3>
+                  <p class="price">${item.price}</p>
+                  <p>${item.description}</p>
+                </div>
+              </div>
+            `;
+            wrapper.innerHTML += card;
+          });
+        })
+        .catch(error => console.error('Error fetching data:', error));
+    </script>
+ <script src="assets/js/navbar.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js"></script>
+</body>
+</html>

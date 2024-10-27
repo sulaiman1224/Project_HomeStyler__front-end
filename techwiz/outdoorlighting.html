@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bootstrap 5 Multi level Drop down Menu</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="products.css">
+
+</head>
+
+<body>
+
+  <section id="navbar"></section>
+  <div class="wrapper"></div>
+
+    <script>
+      fetch('data.json') 
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+          }
+          return response.json();j
+        })
+        .then(data => {
+          const livingRoomItems = data.outdoorlighting; 
+          const wrapper = document.querySelector('.wrapper');
+
+          livingRoomItems.forEach(item => {
+            const card = `
+              <div class="single-card">
+                <div class="img-area">
+                  <img src="${item.imageSrc}" alt="${item.title}">
+                </div>
+                <div class="info">
+                  <h3>${item.title}</h3>
+                  <p class="price">${item.price}</p>
+                  <p>${item.description}</p>
+                </div>
+              </div>
+            `;
+            wrapper.innerHTML += card;
+          });
+        })
+        .catch(error => console.error('Error fetching data:', error));
+    </script>
+
+            
+  
+      
+        
+    </section>
+    
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js"></script>
+
+
+<script src="assets/js/navbar.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>
